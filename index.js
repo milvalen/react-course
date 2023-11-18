@@ -1,26 +1,35 @@
-import React from "react"
-import ReactDOM from "react-dom"
+/*
+Challenge: Starting from scratch, build and render the 
+HTML for our section project. Check the Google slide for 
+what you're trying to build.
 
-/**
-Challenge: fix our code!
+We'll be adding styling to it later.
 
-Don't forget, you're not using CDNs anymore, so there's no
-global "ReactDOM" variable to use anymore.
+Hints:
+* The React logo is a file in the project tree, so you can
+  access it by using `src="./react-logo.png" in your image
+  element
+* You can also set the `width` attribute of the image element
+  just like in HTML. In the slide, I have it set to 40px
  */
 
-const 
-    page = (
-        <div>
-            <h1>My awesome website in React</h1>
-            <h3>Reasons I love React</h3>
-            <ol>
-                <li>It's composable</li>
-                <li>It's declarative</li>
-                <li>It's a hireable skill</li>
-                <li>It's actively maintained by skilled people</li>
-            </ol>
-        </div>
-    ),
-    pageRoot = document.getElementById("root")
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(page, pageRoot) 
+const
+  sectionElem = (
+    <section>
+      <img src="./react-logo.png" width="40px"/>
+      <h1>Fun facts about React</h1>
+      <ul>
+        <li>Was released in 2013</li>
+        <li>Was originally created by Jordan Walke</li>
+        <li>Has well over 100K stars on Github</li>
+        <li>Is maintained by Facebook</li>
+        <li>Powers thousands of enterprise apps, including mobile apps</li>
+      </ul>
+    </section>
+  ),
+  rootElem = document.getElementById('root')
+  
+ReactDOM.render(sectionElem, rootElem)
