@@ -2,9 +2,6 @@ module.exports = {
   "output": {
     "filename": "[name].pack.js"
   },
-  "entry": {
-    "index": "./index"
-  },
   "module": {
     "rules": [
       {
@@ -21,5 +18,8 @@ module.exports = {
         "test": /\.js$/
       }
     ]
+  },
+  "entry": {
+    "index": "./index"
   }
 };
