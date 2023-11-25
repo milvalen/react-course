@@ -1,9 +1,9 @@
 * {
     box-sizing: border-box;
-    margin: 0;
 }
 
 body {
+    margin: 0;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -12,6 +12,14 @@ nav {
     display: flex;
     padding: 20px 36px;
     box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.gray {
+    color: #918E9B;
 }
 
 .nav--logo {
@@ -41,35 +49,20 @@ section {
 }
 
 .card {
-    display: flex;
-    align-items: left;
-    flex-direction: column;
-    gap: 8px;
-    width: 176px;
+    width: 175px;
     font-size: 12px;
-    color: #222222;
 }
 
-.card--photo {
+.card--image {
     width: 100%;
     border-radius: 9px;
-    margin-bottom: 1px;
 }
 
 .card--stats {
     display: flex;
     align-items: center;
-    gap: 2px;
 }
 
 .card--star {
-    width: 14px;
-}
-
-.gray {
-    color: #918E9B;
-}
-
-.bold {
-    font-weight: 600;
+    height: 14px;
 }
