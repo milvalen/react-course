@@ -1,13 +1,13 @@
 import React from "react"
-import memesData from "../memesData.js"
 
 export default function Meme() {
     /**
      * Challenge: 
-     * 1. Set up the text inputs to save to
-     *    the `topText` and `bottomText` state variables.
-     * 2. Replace the hard-coded text on the image with
-     *    the text being saved to state.
+     * Try to figure out why our code is broken! 😞
+     * 
+     * Hint: it has to do with the difference between
+     * what we were importing before from memesData.js
+     * and what we're setting our state as with `allMemes`
      */
     
     const [meme, setMeme] = React.useState({
@@ -15,7 +15,24 @@ export default function Meme() {
         bottomText: "",
         randomImage: "http://i.imgflip.com/1bij.jpg" 
     })
-    const [allMemeImages, setAllMemeImages] = React.useState(memesData)
+    const [allMemes, setAllMemes] = React.useState([])
+    
+    React.useEffect(() => {
+        fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then(data => setAllMemes(data.data.memes))
+    }, [])
+    
+    function getMemeImage() {
+        const randomNumber = Math.floor(Math.random() * allMemes.length)
+        const url = allMemes[randomNumber].url
+        setMeme(prevMeme => ({
+            topText: prevMeme.topText,
+            bottomText: prevMeme.bottomText,
+            randomImage: url
+        }))
+        
+    }
     
     function handleChange(event) {
         const {name, value} = event.target
@@ -25,18 +42,6 @@ export default function Meme() {
             randomImage: prevMeme.randomImage,
             [name]: value
         }))
-    }
-    
-    function getMemeImage() {
-        const memesArray = allMemeImages.data.memes
-        const randomNumber = Math.floor(Math.random() * memesArray.length)
-        const url = memesArray[randomNumber].url
-        setMeme(prevMeme => ({
-            topText: prevMeme.topText,
-            bottomText: prevMeme.bottomText,
-            randomImage: url
-        }))
-        
     }
     
     return (
