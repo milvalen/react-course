@@ -6,6 +6,12 @@ import Split from "react-split"
 import {nanoid} from "nanoid"
 
 export default function App() {
+    /**
+     * Challenge: When the user edits a note, reposition
+     * it in the list of notes to the top of the list
+     */
+    
+    // localStorage.clear()
     const [notes, setNotes] = React.useState(
         () => JSON.parse(localStorage.getItem("notes")) || []
     )
@@ -15,7 +21,6 @@ export default function App() {
     
     React.useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(notes))
-        // console.log(JSON.stringify(notes[0].body))
     }, [notes])
     
     function createNewNote() {
@@ -28,11 +33,17 @@ export default function App() {
     }
     
     function updateNote(text) {
-        setNotes(oldNotes => oldNotes.map(oldNote => {
-            return oldNote.id === currentNoteId
-                ? { ...oldNote, body: text }
-                : oldNote
-        }))
+        setNotes(oldNotes => {
+            const newNotes = []
+            for (let i = 0; i < oldNotes.length; i++) {
+                if (oldNotes[i].id === currentNoteId) {
+                    newNotes.unshift({...oldNotes[i], body: text})
+                } else {
+                    newNotes.push(oldNotes[i])
+                }
+            }
+            return newNotes
+        })
     }
     
     function findCurrentNote() {
