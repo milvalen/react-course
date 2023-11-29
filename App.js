@@ -12,9 +12,9 @@ import Die from "./Die"
 
 export default function App() {
     function allNewDice() {
-        const dices = []
-        for (let i = 0; i < 10; i++) dices.push(Math.ceil(Math.random() * 6))
-        return dices
+        const dice = []
+        for (let i = 0; i < 10; i++) dice.push(Math.ceil(Math.random() * 6))
+        return dice
     }
     
     console.log(allNewDice())
