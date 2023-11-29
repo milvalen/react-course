@@ -13,6 +13,8 @@ import {
 import { notesCollection, db } from "./firebase"
 export default function App() {
     const [notes, setNotes] = React.useState([])
+    const sortedNotes = notes.sort((noteA, noteB) => noteB.updatedAt - noteA.updatedAt)
+    
     const [currentNoteId, setCurrentNoteId] = React.useState("")
     
     const currentNote =
@@ -21,13 +23,17 @@ export default function App() {
         
     /**
      * Challenge:
-     * 1. Add createdAt and updatedAt properties to the notes
+     * 1. ✅ Add createdAt and updatedAt properties to the notes
      *    When a note is first created, set the `createdAt` and `updatedAt`
      *    properties to `Date.now()`. Whenever a note is modified, set the
      *    `updatedAt` property to `Date.now()`.
      * 
-     * 2. TBA
+     * 2. Create a new `sortedNotes` array (doesn't need to be saved 
+     *    in state) that orders the items in the array from 
+     *    most-recently-updated to least-recently-updated.
+     *    This may require a quick Google search.
      */
+    
 
     React.useEffect(() => {
         const unsubscribe = onSnapshot(notesCollection, function (snapshot) {
@@ -48,9 +54,9 @@ export default function App() {
 
     async function createNewNote() {
         const newNote = {
+            body: "# Type your markdown note's title here",
             createdAt: Date.now(),
-            updatedAt: Date.now(),
-            body: "# Type your markdown note's title here"
+            updatedAt: Date.now()
         }
         const newNoteRef = await addDoc(notesCollection, newNote)
         setCurrentNoteId(newNoteRef.id)
@@ -58,7 +64,11 @@ export default function App() {
 
     async function updateNote(text) {
         const docRef = doc(db, "notes", currentNoteId)
-        await setDoc(docRef, { updatedAt: Date.now(), body: text }, { merge: true })
+        await setDoc(
+            docRef, 
+            { body: text, updatedAt: Date.now() }, 
+            { merge: true }
+        )
     }
 
     async function deleteNote(noteId) {
@@ -77,7 +87,7 @@ export default function App() {
                         className="split"
                     >
                         <Sidebar
-                            notes={notes}
+                            notes={sortedNotes}
                             currentNote={currentNote}
                             setCurrentNoteId={setCurrentNoteId}
                             newNote={createNewNote}
