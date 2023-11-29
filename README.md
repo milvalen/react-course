@@ -1,15 +1,20 @@
-# coc6d42a8ac95430b7243da67
-
-Warning: Vite enforces using jsx syntax inside jsx/tsx files, so it will complain about that. Solution: rename `.js` files to `.jsx` :)
+# cob4945cca063d53f7899c7e1
 
 Quick start:
 
 ```
-$ npm install
-$ npm start
+$ yarn # npm install
+$ yarn build # npm run build
 ````
 
-Head over to https://vitejs.dev/ to learn more about using vite
+## Development
+
+Run Webpack in watch-mode to continually compile the JavaScript as you work:
+
+```
+$ yarn watch # npm run watch
+```
+
 ## About Scrimba
 
 At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
